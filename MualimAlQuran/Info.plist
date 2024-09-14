@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>NSUserTrackingUsageDescription</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1037497793247-rgps8kep3m798eqpbaufngv8klruvp39</string>
+			</array>
+		</dict>
+	</array>
+	<key>GIDClientID</key>
+	<string>1037497793247-rgps8kep3m798eqpbaufngv8klruvp39.apps.googleusercontent.com</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>hafs.otf</string>
+		<string>philosopher.ttf</string>
+		<string>philosopherbold.ttf</string>
+		<string>scheherazade.ttf</string>
+		<string>scheherazadebold.ttf</string>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict/>
+</dict>
+</plist>
