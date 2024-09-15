@@ -81,11 +81,11 @@ struct MualimAlQuranApp: App {
                     .environmentObject(mvm) 
                     .environmentObject(sheetVM)                    
             }
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+            /*.onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                 ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
                     
                 })
-            }
+            }*/
         }
     }
 }
