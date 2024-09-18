@@ -228,35 +228,38 @@ func syncMemorizing(vmAccount: AccountViewModel?, mvm: MainViewModel) async {
                 if (user.Memorizing != "") {
                     
                     UserDefaults.standard.removeObject(forKey: "MemorizingProgress")
-                                  
-                    let onlineData = try! JSONDecoder().decode([Memorizing].self, from: user.Memorizing.data(using: .utf8)!)
                     
-                    onlineData.forEach { it in
+                    DispatchQueue.main.async {
                         
-                        setMemorizing(userID: getUser(type: "ID"), 
-                                      surah: it.Surah,
-                                      surahName: it.SurahName,
-                                      ayah: it.Ayah,
-                                      verses: it.Verses,
-                                      repetitions: it.Repetitions,
-                                      _from: it._From,
-                                      push: false,
-                                      date: it.NewDate)
-                    }
-                    loadMemorizing(vm: vmAccount!, mvm: mvm)
-                    
-                    if (!mvm.recitationItems.isEmpty) {
-                        mvm.recitationItems.forEach { it in
+                        let onlineData = try! JSONDecoder().decode([Memorizing].self, from: user.Memorizing.data(using: .utf8)!)
+                        
+                        onlineData.forEach { it in
                             
-                            if (isMemorized(userID: getUser(type: "ID"), surah: it.Surah, ayah: it.Ayah)) {
-                                it.memorized = true
-                            } else {
-                                it.memorized = false
+                            setMemorizing(userID: getUser(type: "ID"),
+                                          surah: it.Surah,
+                                          surahName: it.SurahName,
+                                          ayah: it.Ayah,
+                                          verses: it.Verses,
+                                          repetitions: it.Repetitions,
+                                          _from: it._From,
+                                          push: false,
+                                          date: it.NewDate)
+                        }
+                        loadMemorizing(vm: vmAccount!, mvm: mvm)
+                        
+                        if (!mvm.recitationItems.isEmpty) {
+                            mvm.recitationItems.forEach { it in
+                                
+                                if (isMemorized(userID: getUser(type: "ID"), surah: it.Surah, ayah: it.Ayah)) {
+                                    it.memorized = true
+                                } else {
+                                    it.memorized = false
+                                }
                             }
                         }
+                        
+                        vmAccount?.sync = false
                     }
-                    
-                    vmAccount?.sync = false
                 }
             }
         }

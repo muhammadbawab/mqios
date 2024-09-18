@@ -1,5 +1,6 @@
 import SwiftUI
 import GoogleSignIn
+import AuthenticationServices
 
 class ResponseHandler: ObservableObject {
     @Published var submitText = ""
@@ -9,6 +10,7 @@ class ResponseHandler: ObservableObject {
     @Published var errorMessage = ""
     @Published var success = false
     @Published var successMessage = ""
+    @Published var appleShow = true
     
     func preSubmit() {
         self.error = false
@@ -28,6 +30,7 @@ class ResponseHandler: ObservableObject {
         self.submitText = mvm.home.Login
         self.submitLoading = false
         self.submitEnabled = true
+        self.appleShow = true
     }
 }
 
@@ -44,6 +47,7 @@ struct LoginLayout: View {
     @State var forgotPassword = false
     @State var createAccount = false
     @State var googleSignin = false
+    @State var appleSignin = false
     
     @State var name = ""
     @State var nameValid = true
@@ -110,7 +114,7 @@ struct LoginLayout: View {
                                 keyboardFocused: $keyboardFocused)
                     }
                     
-                    if (!googleSignin) {
+                    if (!googleSignin && !appleSignin) {
                         
                         TextBox(type: Fields.email,
                                 label: mvm.home.Email,
@@ -213,7 +217,12 @@ struct LoginLayout: View {
                                             //region Login
                                             else {
                                                 
-                                                let model = await Apis().login(email: email, password: password)
+                                                var appleUserID = ""
+                                                if (UserDefaults.standard.string(forKey: "AppleIDUser") != nil) {
+                                                    appleUserID = UserDefaults.standard.string(forKey: "AppleIDUser")!
+                                                }
+                                                
+                                                let model = await Apis().login(email: email, password: password, appleUserID: appleUserID)
                                                 
                                                 Apis.validateResponse(mvm: mvm, type: "login", model: model, rh: rh) { it in
                                                     
@@ -315,7 +324,7 @@ struct LoginLayout: View {
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                     }
                     
-                    if (!googleSignin) {
+                    if (!googleSignin && !appleSignin) {
                         Spacer().frame(height: 50)
                     }
                     else {
@@ -323,7 +332,7 @@ struct LoginLayout: View {
                     }
                     
                     //region Login with Google
-                    if (!forgotPassword && !createAccount) {
+                    if (!forgotPassword && !createAccount && !appleSignin) {
                         
                         Button(
                             action: {
@@ -352,19 +361,24 @@ struct LoginLayout: View {
                                         
                                         else if (signInResult == nil) {
                                             googleValid = false
-                                            googleMessage = "Failed to retrieve signed in results"
+                                            googleMessage = "Failed to retrieve user information"
                                         }
                                         
                                         else if (signInResult!.user.profile == nil) {
                                             googleValid = false
-                                            googleMessage = "Failed to retrieve signed in results"
+                                            googleMessage = "Failed to retrieve user information"
                                         }
                                         
                                         if (googleValid) {
                                             
                                             Task.detached { @MainActor in
                                                 
-                                                let model = await Apis().google(name: signInResult!.user.profile!.name, email: signInResult!.user.profile!.email)
+                                                var appleUserID = ""
+                                                if (UserDefaults.standard.string(forKey: "AppleIDUser") != nil) {
+                                                    appleUserID = UserDefaults.standard.string(forKey: "AppleIDUser")!
+                                                }
+                                                
+                                                let model = await Apis().google(name: signInResult!.user.profile!.name, email: signInResult!.user.profile!.email, appleUserID: appleUserID)
                                                 
                                                 Apis.validateResponse(mvm: mvm, type: "create", model: model, rh: rh) { it in
                                                     
@@ -412,7 +426,160 @@ struct LoginLayout: View {
                     
                     Spacer().frame(height: 20)
                     
-                    if (!forgotPassword && !createAccount && !googleSignin) {
+                    //region Login with Apple
+                    if (appleSignin) {
+                        
+                        ProgressView().tint(.red)
+                        
+                        Spacer().frame(height: 10)
+                    }
+                    
+                    if (!forgotPassword && !createAccount && !googleSignin && rh.appleShow) {
+                        
+                        SignInWithAppleButton(.signIn) { request in
+                            
+                            rh.reset(mvm: mvm)
+                            appleSignin = true
+                            summary = "Signing in with Apple"
+                            mvm.viewLevel = "apple"
+                            mvm.accountViewLevel = "apple"
+                            
+                            request.requestedScopes = [.fullName, .email]
+                            
+                        } onCompletion: { result in
+                            
+                            switch result {
+                                
+                            case .success(let auth):
+                                
+                                rh.appleShow = false
+                                
+                                if let userCredential = auth.credential as? ASAuthorizationAppleIDCredential {
+                                 
+                                    var name = ""
+                                    var email = ""
+                                    var appleUserID = ""
+                                    
+                                    if (UserDefaults.standard.string(forKey: "AppleIDUser") != nil &&
+                                        UserDefaults.standard.string(forKey: "AppleIDName") != nil &&
+                                        UserDefaults.standard.string(forKey: "AppleIDEmail") != nil &&
+                                        UserDefaults.standard.string(forKey: "AppleIDUser") == userCredential.user) {
+                                        
+                                        name = UserDefaults.standard.string(forKey: "AppleIDName")!
+                                        email = UserDefaults.standard.string(forKey: "AppleIDEmail")!
+                                        appleUserID = userCredential.user
+                                    }
+                                    else {
+                                        
+                                        appleUserID = userCredential.user
+                                        UserDefaults.standard.set(userCredential.user, forKey: "AppleIDUser")
+                                        
+                                        if (userCredential.identityToken != nil) {
+                                            UserDefaults.standard.set(userCredential.identityToken!.description, forKey: "AppleIDToken")
+                                        }
+                                        if (userCredential.authorizationCode != nil) {
+                                            UserDefaults.standard.set(userCredential.authorizationCode!.description, forKey: "AppleIDAuthCode")
+                                        }
+                                        if (userCredential.state != nil) {
+                                            UserDefaults.standard.set(userCredential.state, forKey: "AppleIDState")
+                                        }
+                                        
+                                        if (userCredential.fullName != nil) {
+                                            if (userCredential.fullName!.givenName != nil) {
+                                                if (userCredential.fullName!.givenName! != "") {
+                                                    
+                                                    name = userCredential.fullName!.givenName!
+                                                    
+                                                    if (userCredential.fullName!.familyName != nil) {
+                                                        if (userCredential.fullName!.familyName! != "") {
+                                                            name += " " + userCredential.fullName!.familyName!
+                                                        }
+                                                    }
+                                                    
+                                                    UserDefaults.standard.set(name, forKey: "AppleIDName")
+                                                }
+                                            }
+                                        }
+                                                                                
+                                        if (userCredential.email != nil) {
+                                            if (userCredential.email! != "") {
+                                                
+                                                email = userCredential.email!
+                                                
+                                                UserDefaults.standard.set(email, forKey: "AppleIDEmail")
+                                            }
+                                        }
+                                    }
+                                    
+                                    if (email != "") {
+                                        
+                                        if (name == "") {
+                                            name = email.components(separatedBy: "@")[0].description
+                                        }
+                                        
+                                        Task.detached { @MainActor in
+                                            
+                                            let model = await Apis().google(name: name, email: email, appleUserID: appleUserID)
+                                            
+                                            Apis.validateResponse(mvm: mvm, type: "create", model: model, rh: rh) { it in
+                                                
+                                                DispatchQueue.main.async {
+                                                    
+                                                    clearFields()
+                                                    mvm.accountBack = true
+                                                    
+                                                    callback!(it)
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else {
+                                        
+                                        Task.detached { @MainActor in
+                                            
+                                            let model = await Apis().apple(appleUserID: appleUserID)
+                                            
+                                            Apis.validateResponse(mvm: mvm, type: "apple", model: model, rh: rh) { it in
+                                                
+                                                DispatchQueue.main.async {
+                                                    
+                                                    clearFields()
+                                                    mvm.accountBack = true
+                                                    
+                                                    callback!(it)
+                                                }
+                                            }
+                                        }
+                                        
+                                        //rh.error = true
+                                        //rh.errorMessage = "Failed to retrieve user information"
+                                        //appleSignin = false
+                                    }
+                                }
+                                else {
+                                    
+                                    rh.error = true
+                                    rh.errorMessage = "Failed to retrieve user information"
+                                    appleSignin = false
+                                }
+                                
+                            case .failure(let error):
+                                
+                                rh.error = true
+                                rh.errorMessage = "Failed to retrieve user information: \(error.localizedDescription)"
+                                appleSignin = false
+                                
+                            }
+                        }
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .frame(width: 300, height: 45)
+                        .signInWithAppleButtonStyle(.black)
+                    }
+                    //endregion
+                    
+                    Spacer().frame(height: 20)
+                    
+                    if (!forgotPassword && !createAccount && !googleSignin && !appleSignin) {
 
                         Button(
                             action: {
@@ -464,6 +631,7 @@ struct LoginLayout: View {
                         forgotPassword = false
                         createAccount = false
                         googleSignin = false
+                        appleSignin = false
                         
                         rh.reset(mvm: mvm)
                         

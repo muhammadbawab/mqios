@@ -16,7 +16,7 @@ class MainViewModel: ObservableObject
     @Published var accountScroll: Int? = nil
     @Published var accountViewLevel = "account"
     @Published var accountBack = false
-    @Published var accountBackLevels = ["forgot", "google", "create"]
+    @Published var accountBackLevels = ["forgot", "google", "create", "apple"]
     
     @Published var menuScroll: Int? = nil
     @Published var menuBackLevels = ["page", "feedback", "language", "download"]

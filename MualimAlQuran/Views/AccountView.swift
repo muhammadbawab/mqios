@@ -51,8 +51,8 @@ struct AccountView: View {
                     
                     userID = user.id
                     
-                    Task { @MainActor in
-                        
+                    Task.detached { @MainActor in
+                                                
                         await syncMemorizing(vmAccount: vm, mvm: mvm)
                     }
                 }

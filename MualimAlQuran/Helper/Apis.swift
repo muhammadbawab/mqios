@@ -51,12 +51,13 @@ class WebService {
 
 @MainActor class Apis: ObservableObject {
     
-    func login(email: String, password: String) async -> UserResponse? {
+    func login(email: String, password: String, appleUserID: String) async -> UserResponse? {
         
         let params: [String: Any] = [
             "key": "396143f45a51d4157777290a5cfc4c8c",
             "email": email,
-            "password": password
+            "password": password,
+            "appleUserID": appleUserID
         ]
         
         return await WebService().downloadData(fromURL: "https://mualim-alquran.com/apis/login", params: params)        
@@ -74,15 +75,26 @@ class WebService {
         return await WebService().downloadData(fromURL: "https://mualim-alquran.com/apis/create", params: params)
     }
     
-    func google(name: String, email: String) async -> UserResponse? {
+    func google(name: String, email: String, appleUserID: String) async -> UserResponse? {
         
         let params: [String: Any] = [
             "key": "396143f45a51d4157777290a5cfc4c8c",
             "name": name,
-            "email": email
+            "email": email,
+            "appleUserID": appleUserID
         ]
         
         return await WebService().downloadData(fromURL: "https://mualim-alquran.com/apis/google", params: params)
+    }
+    
+    func apple(appleUserID: String) async -> UserResponse? {
+        
+        let params: [String: Any] = [
+            "key": "396143f45a51d4157777290a5cfc4c8c",
+            "appleUserID": appleUserID
+        ]
+        
+        return await WebService().downloadData(fromURL: "https://mualim-alquran.com/apis/apple", params: params)
     }
     
     func forgot(email: String) async -> UserResponse? {
@@ -166,7 +178,7 @@ class WebService {
             submitText = mvm.home.Submit
         }
         
-        if (type == "create") {
+        if (type == "create" || type == "apple") {
             submitText = mvm.home.Submit
         }
         
@@ -208,6 +220,7 @@ class WebService {
                         rh.submitText = submitText
                         rh.submitLoading = false
                         rh.submitEnabled = true
+                        rh.appleShow = true
                     }
                 }
                 
@@ -217,6 +230,7 @@ class WebService {
                 rh.submitText = submitText
                 rh.submitLoading = false
                 rh.submitEnabled = true
+                rh.appleShow = true
             }
         }
         else {
@@ -225,6 +239,7 @@ class WebService {
             rh.submitText = submitText
             rh.submitLoading = false
             rh.submitEnabled = true
+            rh.appleShow = true
         }
     }
 }
