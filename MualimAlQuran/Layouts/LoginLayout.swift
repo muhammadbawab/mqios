@@ -218,8 +218,11 @@ struct LoginLayout: View {
                                             else {
                                                 
                                                 var appleUserID = ""
-                                                if (UserDefaults.standard.string(forKey: "AppleIDUser") != nil) {
-                                                    appleUserID = UserDefaults.standard.string(forKey: "AppleIDUser")!
+                                                if (UserDefaults.standard.string(forKey: "AppleIDUser") != nil &&
+                                                    UserDefaults.standard.string(forKey: "AppleIDEmail") != nil) {
+                                                    if (UserDefaults.standard.string(forKey: "AppleIDEmail")!.trim() == email.trim()) {
+                                                        appleUserID = UserDefaults.standard.string(forKey: "AppleIDUser")!
+                                                    }
                                                 }
                                                 
                                                 let model = await Apis().login(email: email, password: password, appleUserID: appleUserID)
@@ -374,8 +377,11 @@ struct LoginLayout: View {
                                             Task.detached { @MainActor in
                                                 
                                                 var appleUserID = ""
-                                                if (UserDefaults.standard.string(forKey: "AppleIDUser") != nil) {
-                                                    appleUserID = UserDefaults.standard.string(forKey: "AppleIDUser")!
+                                                if (UserDefaults.standard.string(forKey: "AppleIDUser") != nil &&
+                                                    UserDefaults.standard.string(forKey: "AppleIDEmail") != nil) {
+                                                    if (UserDefaults.standard.string(forKey: "AppleIDEmail")!.trim() == email.trim()) {
+                                                        appleUserID = UserDefaults.standard.string(forKey: "AppleIDUser")!
+                                                    }
                                                 }
                                                 
                                                 let model = await Apis().google(name: signInResult!.user.profile!.name, email: signInResult!.user.profile!.email, appleUserID: appleUserID)

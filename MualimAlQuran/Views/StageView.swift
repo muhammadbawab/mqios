@@ -66,31 +66,35 @@ struct StageView: View {
                                         
                                         if (item.id == 51) {
                                             
-                                            NavigationLink(destination: StageView1(stage: item)) {
-                                                
-                                                ListItem(item: item)
-                                            }
-                                            .simultaneousGesture(TapGesture().onEnded({
+                                            NavigationLink(destination: StageView1(stage: item), tag: item.id, selection: $mvm.stageNavSelection) { }
+                                            Button (action: {
                                                 
                                                 mvm.listType = "stage1"
                                                 mvm.listSelected1 = item.wrappedValue
                                                 mvm.stageTab = ListModel(isTab: true, TabIndex: "101")
-                                            }))
+                                                mvm.stageNavSelection = item.id
+                                                
+                                            }) {
+                                                
+                                                ListItem(item: item)
+                                            }
                                         }
                                         else {
                                             
                                             if (item.StageID.wrappedValue == 1) {
 
-                                                NavigationLink(destination: LessonView(lesson: item)) {
-                                                    
-                                                    ListItem(item: item)
-                                                }
-                                                .simultaneousGesture(TapGesture().onEnded({
+                                                NavigationLink(destination: LessonView(lesson: item), tag: item.id, selection: $mvm.stageNavSelection) { }
+                                                Button (action: {
                                                     
                                                     mvm.listType = "lesson"
                                                     mvm.lessonSelected = item.wrappedValue
                                                     mvm.loadLessonItems()
-                                                }))
+                                                    mvm.stageNavSelection = item.id
+                                                    
+                                                }) {
+                                                    
+                                                    ListItem(item: item)
+                                                }
 
                                             } else if (
                                                 (item.StageID.wrappedValue == 2) ||
@@ -99,31 +103,23 @@ struct StageView: View {
                                                 (item.StageID.wrappedValue == 3 && item.Number.wrappedValue == -2)
                                             ) {
 
-                                                NavigationLink(destination: RecitationView()) {
-                                                    
-                                                    ListItem(item: item)
-                                                }
-                                                .simultaneousGesture(TapGesture().onEnded({
+                                                NavigationLink(destination: RecitationView(), tag: item.id, selection: $mvm.stageNavSelection) { }
+                                                Button (action: {
                                                     
                                                     mvm.recitationInitialLoad = false
                                                     mvm.listType = "recitation"
                                                     mvm.lessonSelected = item.wrappedValue
                                                     mvm.recitationItems = mvm.verse1
-                                                }))
-
-                                            } else if (item.StageID.wrappedValue == 4) {
-
-                                                
-                                                
-                                                //NavigationLink(destination: LessonView(lesson: item, viewLevel: $viewLevel)) {
+                                                    mvm.stageNavSelection = item.id
+                                                    
+                                                }) {
                                                     
                                                     ListItem(item: item)
-                                                //}
-                                                //.simultaneousGesture(TapGesture().onEnded({
+                                                }
 
-                                                //    mvm.lessonSelected = item
-                                                //    mvm.loadQLItems()
-                                                //}))
+                                            } else if (item.StageID.wrappedValue == 4) {
+ 
+                                                ListItem(item: item)
                                             }
                                             
                                         }
@@ -170,46 +166,42 @@ struct StageView: View {
                                                 
                                                     if (item.StageID.wrappedValue == 1) {
 
-                                                        NavigationLink(destination: LessonView(lesson: item)) {
-                                                            
-                                                            ListItem(item: item)
-                                                        }
-                                                        .simultaneousGesture(TapGesture().onEnded({
+                                                        NavigationLink(destination: LessonView(lesson: item), tag: item.id, selection: $mvm.stageNavSelection) { }
+                                                        Button (action: {
                                                             
                                                             mvm.listType = "lesson"
                                                             mvm.lessonSelected = item.wrappedValue
                                                             mvm.loadLessonItems()
-                                                        }))
-
+                                                            mvm.stageNavSelection = item.id
+                                                            
+                                                        }) {
+                                                            
+                                                            ListItem(item: item)
+                                                        }
+                                                     
                                                     } else if (
                                                         (item.StageID.wrappedValue == 2) ||
                                                         (item.StageID.wrappedValue == 5) ||
                                                         (item.StageID.wrappedValue == 3 && item.Number.wrappedValue == -1) ||
                                                         (item.StageID.wrappedValue == 3 && item.Number.wrappedValue == -2)
                                                     ) {
-
-                                                        //NavigationLink(destination: LessonView(lesson: item, viewLevel: $viewLevel)) {
-                                                            
-                                                            ListItem(item: item)
-        //                                                }
-        //                                                .simultaneousGesture(TapGesture().onEnded({
-        //
-        //                                                    mvm.listType = "recitation"
-        //                                                    mvm.lessonSelected = item
-        //                                                    mvm.recitationItems = mvm.verse1
-        //                                                }))
+                                                        
+                                                        ListItem(item: item)
 
                                                     } else if (item.StageID.wrappedValue == 4) {
 
-                                                        NavigationLink(destination: QLView()) {
+                                                        NavigationLink(destination: QLView(), tag: item.id, selection: $mvm.stageNavSelection) { }
+                                                        Button (action: {
+                                                            
+                                                            mvm.lessonSelected = item.wrappedValue
+                                                            mvm.loadQLItems(mvm: mvm)
+                                                            mvm.stageNavSelection = item.id
+                                                            
+                                                        }) {
                                                             
                                                             ListItem(item: item)
                                                         }
-                                                        .simultaneousGesture(TapGesture().onEnded({
-
-                                                            mvm.lessonSelected = item.wrappedValue
-                                                            mvm.loadQLItems(mvm: mvm)
-                                                        }))
+                                                        
                                                     }                                                                                                        
                                                 }
                                             }

@@ -95,29 +95,35 @@ struct StageView1: View {
                                                     
                                                     if (item.wrappedValue.Number == 25) {
                                                         
-                                                        NavigationLink(destination: TajweedExView()) {
-                                                            
-                                                            ListItem(item: item)
-                                                        }
-                                                        .simultaneousGesture(TapGesture().onEnded({
+                                                        NavigationLink(destination: TajweedExView(), tag: item.id, selection: $mvm.stage1NavSelection) { }
+                                                        Button (action: {
                                                             
                                                             mvm.lessonSelected = item.wrappedValue
                                                             mvm.tajweedSelectedSetup = mvm.tajweedSetup.first { $0.id == mvm.lessonSelected.Number }!
                                                             mvm.loadTajweedExItems()
-                                                        }))
-                                                    }
-                                                    else {
-                                                        
-                                                        NavigationLink(destination: TajweedView()) {
+                                                            mvm.stage1NavSelection = item.id
+                                                            
+                                                        }) {
                                                             
                                                             ListItem(item: item)
                                                         }
-                                                        .simultaneousGesture(TapGesture().onEnded({
+                                                        
+                                                    }
+                                                    else {
+                                                        
+                                                        NavigationLink(destination: TajweedView(), tag: item.id, selection: $mvm.stage1NavSelection) { }
+                                                        Button (action: {
                                                             
                                                             mvm.lessonSelected = item.wrappedValue
                                                             mvm.tajweedSelectedSetup = mvm.tajweedSetup.first { $0.id == mvm.lessonSelected.Number }!
                                                             mvm.loadTajweedItems()
-                                                        }))
+                                                            mvm.stage1NavSelection = item.id
+                                                            
+                                                        }) {
+                                                            
+                                                            ListItem(item: item)
+                                                        }
+                                                        
                                                     }
                                                 }
                                             }

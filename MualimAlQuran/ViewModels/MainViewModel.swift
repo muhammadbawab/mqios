@@ -12,6 +12,8 @@ class MainViewModel: ObservableObject
     @Published var backForce = false
     @Published var navigateToMemorizing = false
     @Published var homeNavSelection: Int? = nil
+    @Published var stageNavSelection: Int? = nil
+    @Published var stage1NavSelection: Int? = nil
     
     @Published var accountScroll: Int? = nil
     @Published var accountViewLevel = "account"

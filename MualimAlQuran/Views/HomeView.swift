@@ -47,11 +47,7 @@ struct HomeView: View {
                                     
                                     if (item.id == 7) {
                                         
-                                        NavigationLink(destination: RecitationView(), tag: item.id, selection: $mvm.homeNavSelection) {
-                                            
-                                            ListItem(item: item)                                                
-                                        }
-                                        .simultaneousGesture(TapGesture().onEnded({
+                                        Button(action:{  
                                             
                                             let lessonItem = item
                                             lessonItem.StageID.wrappedValue = 7
@@ -61,21 +57,31 @@ struct HomeView: View {
                                             mvm.listSelected = item.wrappedValue
                                             mvm.lessonSelected = lessonItem.wrappedValue
                                             mvm.recitationItems = mvm.verse1
-                                        }))
-                                        
-                                    } else {
-                                        
-                                        NavigationLink(destination: StageView(stage: item), tag: item.id, selection: $mvm.homeNavSelection) {
+                                            mvm.homeNavSelection = item.id
+                                            
+                                        }) {
                                             
                                             ListItem(item: item)
                                         }
-                                        .simultaneousGesture(TapGesture().onEnded({
+                                        
+                                        NavigationLink(destination: RecitationView(), tag: item.id, selection: $mvm.homeNavSelection) { }
+                                        
+                                    } else {
+                                        
+                                        Button(action: {
                                             
                                             mvm.listType = "stage"
                                             mvm.listSelected = item.wrappedValue
                                             mvm.stageTab = ListModel(isTab: true, TabIndex: "101")
                                             mvm.loadStageLessons(item: mvm.listSelected)
-                                        }))
+                                            mvm.homeNavSelection = item.id
+                                            
+                                        }) {
+                                            
+                                            ListItem(item: item)
+                                        }
+                                        
+                                        NavigationLink(destination: StageView(stage: item), tag: item.id, selection: $mvm.homeNavSelection) { }
                                     }
                                 }
                                 .id(item.id)
