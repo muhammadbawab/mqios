@@ -67,6 +67,18 @@ struct AccountLayout: View {
                         .padding(.trailing, 5)
                         //endregion
                         
+                        //region Delete Account
+                        VStack(spacing: 0) {
+                            
+                            Text("If you would like to delete your account and all associated data, please [click here](https://mualim-alquran.com/delete-account)")
+                                .frame(maxWidth: .infinity)
+                                .padding(10)
+                                .background(colorResource.lightButton)
+                                .clipShape(RoundedRectangle(cornerRadius: 4))
+                        }
+                        .padding(.bottom, 10)
+                        //endregion
+                        
                         ZStack {
                             
                             if (mvm.memorizingItems.isEmpty) {
