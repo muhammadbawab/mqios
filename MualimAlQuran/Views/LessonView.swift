@@ -91,14 +91,14 @@ struct LessonView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                                 .shadow(color: Color(hex: "#cacaca"), radius: 1)
                                 .padding(.bottom, 10)
-                                .sheet(isPresented: $sheetVM.sheetState) {
-                                    
-                                    if #available(iOS 16.0, *) {
-                                        BottomSheet().presentationDetents([.medium, .large])
-                                    } else {
-                                        BottomSheet()
-                                    }
-                                }
+//                                .sheet(isPresented: $sheetVM.sheetState) {
+//                                    
+//                                    if #available(iOS 16.0, *) {
+//                                        BottomSheet().presentationDetents([.medium, .large])
+//                                    } else {
+//                                        BottomSheet()
+//                                    }
+//                                }
                             }
                             .padding(.leading, layoutPadding)
                             .padding(.trailing, layoutPadding)
@@ -194,7 +194,7 @@ struct LessonView: View {
             }
             .navigationBarHidden(true)
             .clipped()
-            .ignoresSafeArea()
+            .ignoresSafeArea(.all, edges: .top)
             .onAppear {
                 mvm.viewLevel = "lesson"
                 mvm.back = false
@@ -205,7 +205,7 @@ struct LessonView: View {
                 if (mvm.backForce) { dismiss() }
             }
             .task(id: mvm.back) {
-                if (mvm.back) { dismiss(); mvm.back = false }
+                if (mvm.back) { mvm.back = false; dismiss(); }
             }
             .onRotate { newOrientation in
                 

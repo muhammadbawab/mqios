@@ -77,7 +77,7 @@ struct LanguageLayout: View {
                                                     dismiss()
                                                     try! await Task.sleep(nanoseconds: 800_000_000)
                                                     mvm.backForce = true
-                                                    mvm.selectedTab = 0
+                                                    mvm.selectedTab = Tab.home
                                                     try! await Task.sleep(nanoseconds: 1000_000_000)
                                                     sheetVM.sheetState = false
                                                     sheetVM.restart = false
@@ -129,13 +129,13 @@ struct LanguageLayout: View {
         .navigationBarHidden(true)
         .frame(maxWidth: .infinity)
         .clipped()
-        .ignoresSafeArea()
+        .ignoresSafeArea(.all, edges: .top)
         .onAppear {
             mvm.viewLevel = "page"
             mvm.back = false                        
         }
         .task(id: mvm.back) {
-            if (mvm.back) { dismiss(); mvm.back = false }
+            if (mvm.back) { mvm.back = false; dismiss(); }
         }
         .onRotate { newOrientation in
             

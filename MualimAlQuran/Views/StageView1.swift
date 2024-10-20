@@ -95,7 +95,6 @@ struct StageView1: View {
                                                     
                                                     if (item.wrappedValue.Number == 25) {
                                                         
-                                                        NavigationLink(destination: TajweedExView(), tag: item.id, selection: $mvm.stage1NavSelection) { }
                                                         Button (action: {
                                                             
                                                             mvm.lessonSelected = item.wrappedValue
@@ -104,14 +103,13 @@ struct StageView1: View {
                                                             mvm.stage1NavSelection = item.id
                                                             
                                                         }) {
-                                                            
+                                                            NavigationLink(destination: TajweedExView(), tag: item.id, selection: $mvm.stage1NavSelection) { }
                                                             ListItem(item: item)
                                                         }
                                                         
                                                     }
                                                     else {
                                                         
-                                                        NavigationLink(destination: TajweedView(), tag: item.id, selection: $mvm.stage1NavSelection) { }
                                                         Button (action: {
                                                             
                                                             mvm.lessonSelected = item.wrappedValue
@@ -120,7 +118,7 @@ struct StageView1: View {
                                                             mvm.stage1NavSelection = item.id
                                                             
                                                         }) {
-                                                            
+                                                            NavigationLink(destination: TajweedView(), tag: item.id, selection: $mvm.stage1NavSelection) { }
                                                             ListItem(item: item)
                                                         }
                                                         
@@ -146,7 +144,7 @@ struct StageView1: View {
         .navigationBarHidden(true)
         .frame(maxWidth: .infinity)
         .clipped()
-        .ignoresSafeArea()
+        .ignoresSafeArea(.all, edges: .top)
         .onAppear {
 
             mvm.viewLevel = "stage1"
@@ -159,7 +157,7 @@ struct StageView1: View {
             if (mvm.backForce) { dismiss() }
         }
         .task(id: mvm.back) {
-            if (mvm.back) { dismiss(); mvm.back = false }
+            if (mvm.back) { mvm.back = false; dismiss(); }
         }
         .onRotate { newOrientation in
             

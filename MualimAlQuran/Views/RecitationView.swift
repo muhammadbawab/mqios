@@ -252,7 +252,7 @@ struct RecitationView: View {
                                 
                                 Spacer().frame(width: 10)
                                 
-                                Button(action: { mvm.selectedTab = 1 }) {
+                                Button(action: { mvm.selectedTab = Tab.account }) {
                                     
                                     Text("Progress")
                                     
@@ -442,7 +442,7 @@ struct RecitationView: View {
             .navigationBarHidden(true)
             .frame(maxWidth: .infinity)
             .clipped()
-            .ignoresSafeArea()
+            .ignoresSafeArea(.all, edges: .top)
             .onAppear() {
                 
                 mvm.viewLevel = "lesson"
@@ -474,8 +474,9 @@ struct RecitationView: View {
             }
             .task(id: mvm.back) {
                 if (mvm.back) {
+                    mvm.back = false
                     if (mvm.lessonSelected.StageID == 7) { mvm.listSelected = ListModel() }
-                    dismiss(); mvm.back = false
+                    dismiss();
                 }
             }
             .onRotate { newOrientation in

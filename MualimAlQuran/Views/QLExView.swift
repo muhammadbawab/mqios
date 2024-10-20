@@ -137,7 +137,7 @@ struct QLExView: View {
         .navigationBarHidden(true)
         .frame(maxWidth: .infinity)
         .clipped()
-        .ignoresSafeArea()
+        .ignoresSafeArea(.all, edges: .top)
         .onAppear {
             
             audioHelper = AudioHelper(player: $player)
@@ -158,7 +158,7 @@ struct QLExView: View {
             if (mvm.backForce) { dismiss() }
         }
         .task(id: mvm.back) {
-            if (mvm.back) { dismiss(); mvm.back = false }
+            if (mvm.back) { mvm.back = false; dismiss(); }
         }
         .onRotate { newOrientation in
             

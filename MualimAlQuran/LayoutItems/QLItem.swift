@@ -476,14 +476,14 @@ struct QLItem: View {
             
             if (item.Type == "Voc") {
                 
-                NavigationLink(destination: QLVocView(), tag: 0, selection: $navSelection) { }
-                
                 Button(action: {
                     
                     mvm.loadQLVocItems(mvm: mvm)
                     navSelection = 0
                     
                 }) {
+                    
+                    NavigationLink(destination: QLVocView(), tag: 0, selection: $navSelection) { }
                     
                     HStack()
                     {
@@ -515,14 +515,14 @@ struct QLItem: View {
             
             if (item.Type == "Examples") {
                 
-                NavigationLink(destination: QLExView(), tag: 1, selection: $navSelection) { }
-                
                 Button(action: {
                     
                     mvm.loadQLExItems(mvm: mvm)
                     navSelection = 1
                     
                 }) {
+                    
+                    NavigationLink(destination: QLExView(), tag: 1, selection: $navSelection) { }
                     
                     HStack()
                     {

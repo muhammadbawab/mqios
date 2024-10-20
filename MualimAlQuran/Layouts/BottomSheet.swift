@@ -48,8 +48,13 @@ struct BottomSheet: View {
                 VideoPlayer(player: player)
                     .onAppear() {
                         
-                        player = AVPlayer(url: Bundle.main.url(forResource: sheetVM.videoUrl, withExtension: "mp4")!)
-                        player.play()
+                        let url = Bundle.main.url(forResource: sheetVM.videoUrl, withExtension: "mp4")
+                        
+                        if (url != nil) {
+                            
+                            player = AVPlayer(url: Bundle.main.url(forResource: sheetVM.videoUrl, withExtension: "mp4")!)
+                            player.play()
+                        }
                     }
                     .onDisappear() {
                         

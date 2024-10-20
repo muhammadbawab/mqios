@@ -131,7 +131,7 @@ struct DownloadLayout: View {
         .navigationBarHidden(true)
         .frame(maxWidth: .infinity)
         .clipped()
-        .ignoresSafeArea()
+        .ignoresSafeArea(.all, edges: .top)
         .onAppear {
             
             if (mvm.downloadItems.isEmpty) {
@@ -150,7 +150,7 @@ struct DownloadLayout: View {
         }
         .task(id: mvm.back) {
             //mvm.downloadItems.removeAll()
-            if (mvm.back) { dismiss(); mvm.back = false }
+            if (mvm.back) { mvm.back = false; dismiss(); }
         }
         .onRotate { newOrientation in
             

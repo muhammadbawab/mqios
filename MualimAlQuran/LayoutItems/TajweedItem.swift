@@ -18,8 +18,6 @@ struct TajweedItem: View {
             //region Title
             if (item.Type == "Examples") {
                 
-                NavigationLink(destination: TajweedExView(), tag: 0, selection: $navSelection) { }
-                
                 Button(action: {
                     
                     mvm.loadTajweedExItems()
@@ -27,6 +25,7 @@ struct TajweedItem: View {
                     
                 }) {
                     
+                    NavigationLink(destination: TajweedExView(), tag: 0, selection: $navSelection) { }
                     HStack()
                     {
                         

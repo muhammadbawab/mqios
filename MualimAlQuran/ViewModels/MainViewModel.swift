@@ -4,7 +4,8 @@ class MainViewModel: ObservableObject
 {
     //@Published var langList: [String] = ["Title", "Summary", "Link1", "Link2", "LoginSummary", "Email", "Password", "Login", "Registration", "RegistrationSummary", "Name", "Submit", "LoginFooter", "RegisterFooter", "Feedback", "AboutUs", "Lesson", "ForgotPassword", "ForgotPasswordSummary", "ResetPassword", "ResetPasswordSummary", "NewPassword", "ConfirmPassword", "Share", "Instructions", "Page", "OneWord", "TwoWords", "_3Times", "_5Times", "_7Times", "Completed", "Incomplete", "Progress", "Bookmark", "ShareSummary", "InfoSettings", "Downloads", "Language", "RestartApp", "RestartAppSummary", "Letters", "Harakat", "Vowels", "Sukoon", "Muqatta", "Noon", "Meem", "Laam", "Qalqalah", "Madd", "Signs", "Title1", "Summary1", "Trans", "TransH1", "TransH2", "TransH3", "TransT1", "TransT2", "TransT3", "Arti", "SurahName", "Verse_", "Description", "Intro", "IntroText", "Letters", "LettersText", "Method", "MethodText", "Sign", "SignText", "Examples", "Col1", "Col2", "Col3", "Col4", "Vocabularies", "VocabulariesText", "ExamplesText", "Meaning"]
     
-    @Published var selectedTab = 0
+    //@Published var selectedTab = 0
+    @Published var selectedTab = Tab.home
     @Published var homeScroll: Int? = nil
     @Published var viewLevel = "home"
     @Published var back = false

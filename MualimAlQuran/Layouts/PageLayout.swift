@@ -62,13 +62,13 @@ struct PageLayout: View {
         .navigationBarHidden(true)
         .frame(maxWidth: .infinity)
         .clipped()
-        .ignoresSafeArea()
+        .ignoresSafeArea(.all, edges: .top)
         .onAppear {
             mvm.viewLevel = "page"
             mvm.back = false                        
         }
         .task(id: mvm.back) {
-            if (mvm.back) { dismiss(); mvm.back = false }
+            if (mvm.back) { mvm.back = false; dismiss(); }
         }
         .onRotate { newOrientation in
             

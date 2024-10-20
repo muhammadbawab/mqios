@@ -120,7 +120,7 @@ struct QLView: View {
         .navigationBarHidden(true)
         .frame(maxWidth: .infinity)
         .clipped()
-        .ignoresSafeArea()
+        .ignoresSafeArea(.all, edges: .top)
         .onAppear {
             
             activeItem = mvm.qlItems.first{ $0.Type == "Header" }?.id ?? -1
@@ -138,7 +138,7 @@ struct QLView: View {
             if (mvm.backForce) { dismiss() }
         }
         .task(id: mvm.back) {
-            if (mvm.back) { dismiss(); mvm.back = false }
+            if (mvm.back) { mvm.back = false; dismiss(); }
         }
         .onRotate { newOrientation in
             

@@ -47,7 +47,7 @@ struct HomeView: View {
                                     
                                     if (item.id == 7) {
                                         
-                                        Button(action:{  
+                                        Button(action:{
                                             
                                             let lessonItem = item
                                             lessonItem.StageID.wrappedValue = 7
@@ -60,11 +60,9 @@ struct HomeView: View {
                                             mvm.homeNavSelection = item.id
                                             
                                         }) {
-                                            
+                                            NavigationLink(destination: RecitationView(), tag: item.id, selection: $mvm.homeNavSelection) { }
                                             ListItem(item: item)
                                         }
-                                        
-                                        NavigationLink(destination: RecitationView(), tag: item.id, selection: $mvm.homeNavSelection) { }
                                         
                                     } else {
                                         
@@ -77,11 +75,9 @@ struct HomeView: View {
                                             mvm.homeNavSelection = item.id
                                             
                                         }) {
-                                            
+                                            NavigationLink(destination: StageView(stage: item), tag: item.id, selection: $mvm.homeNavSelection) { }
                                             ListItem(item: item)
                                         }
-                                        
-                                        NavigationLink(destination: StageView(stage: item), tag: item.id, selection: $mvm.homeNavSelection) { }
                                     }
                                 }
                                 .id(item.id)

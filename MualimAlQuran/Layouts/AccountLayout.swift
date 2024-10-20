@@ -7,6 +7,8 @@ struct AccountLayout: View {
 
     var callback : (() -> Void)? = nil
     
+    var date = Calendar.current.dateComponents([.day, .month, .year], from: Date())
+    
     var body: some View {
         
         GeometryReader { geo in
@@ -67,17 +69,19 @@ struct AccountLayout: View {
                         .padding(.trailing, 5)
                         //endregion
                         
-                        //region Delete Account
-                        VStack(spacing: 0) {
-                            
-                            Text("If you would like to delete your account and all associated data, please [click here](https://mualim-alquran.com/delete-account)")
-                                .frame(maxWidth: .infinity)
-                                .padding(10)
-                                .background(colorResource.lightButton)
-                                .clipShape(RoundedRectangle(cornerRadius: 4))
+                        if (date.year == 2024 && date.month == 10 && date.day! <= 23) {
+                            //region Delete Account
+                            VStack(spacing: 0) {
+                                
+                                Text("If you would like to delete your account and all associated data, please [click here](https://mualim-alquran.com/delete-account)")
+                                    .frame(maxWidth: .infinity)
+                                    .padding(10)
+                                    .background(colorResource.lightButton)
+                                    .clipShape(RoundedRectangle(cornerRadius: 4))
+                            }
+                            .padding(.bottom, 10)
+                            //endregion
                         }
-                        .padding(.bottom, 10)
-                        //endregion
                         
                         ZStack {
                             
@@ -183,7 +187,7 @@ struct AccountLayout: View {
                                                                     mvm.lessonSelected = lessonItem
                                                                     mvm.recitationItems = mvm.verse1
                                                                                                                                         
-                                                                    mvm.selectedTab = 0
+                                                                    mvm.selectedTab = Tab.home
                                                                                                                                                                                                             
                                                                 }) {
                                                                     

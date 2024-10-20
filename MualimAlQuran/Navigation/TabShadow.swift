@@ -18,7 +18,7 @@ struct TabShadow: View {
         
         Rectangle()
             .fill(Color.white)
-            .frame(height: 5)
+            .frame(height: 0)
             .shadow(color: Color(hex: "#cccccc"), radius: 10)            
     }
 }

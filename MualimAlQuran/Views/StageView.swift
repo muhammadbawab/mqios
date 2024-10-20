@@ -66,7 +66,6 @@ struct StageView: View {
                                         
                                         if (item.id == 51) {
                                             
-                                            NavigationLink(destination: StageView1(stage: item), tag: item.id, selection: $mvm.stageNavSelection) { }
                                             Button (action: {
                                                 
                                                 mvm.listType = "stage1"
@@ -75,15 +74,15 @@ struct StageView: View {
                                                 mvm.stageNavSelection = item.id
                                                 
                                             }) {
-                                                
+                                                NavigationLink(destination: StageView1(stage: item), tag: item.id, selection: $mvm.stageNavSelection) { }
                                                 ListItem(item: item)
                                             }
+                                            
                                         }
                                         else {
                                             
                                             if (item.StageID.wrappedValue == 1) {
-
-                                                NavigationLink(destination: LessonView(lesson: item), tag: item.id, selection: $mvm.stageNavSelection) { }
+                                                
                                                 Button (action: {
                                                     
                                                     mvm.listType = "lesson"
@@ -92,18 +91,17 @@ struct StageView: View {
                                                     mvm.stageNavSelection = item.id
                                                     
                                                 }) {
-                                                    
+                                                    NavigationLink(destination: LessonView(lesson: item), tag: item.id, selection: $mvm.stageNavSelection) { }
                                                     ListItem(item: item)
                                                 }
-
-                                            } else if (
+                                            }
+                                            else if (
                                                 (item.StageID.wrappedValue == 2) ||
                                                 (item.StageID.wrappedValue == 5) ||
                                                 (item.StageID.wrappedValue == 3 && item.Number.wrappedValue == -1) ||
                                                 (item.StageID.wrappedValue == 3 && item.Number.wrappedValue == -2)
                                             ) {
-
-                                                NavigationLink(destination: RecitationView(), tag: item.id, selection: $mvm.stageNavSelection) { }
+                                                
                                                 Button (action: {
                                                     
                                                     mvm.recitationInitialLoad = false
@@ -113,11 +111,11 @@ struct StageView: View {
                                                     mvm.stageNavSelection = item.id
                                                     
                                                 }) {
-                                                    
+                                                    NavigationLink(destination: RecitationView(), tag: item.id, selection: $mvm.stageNavSelection) { }
                                                     ListItem(item: item)
                                                 }
-
-                                            } else if (item.StageID.wrappedValue == 4) {
+                                            }
+                                            else if (item.StageID.wrappedValue == 4) {
  
                                                 ListItem(item: item)
                                             }
@@ -165,8 +163,7 @@ struct StageView: View {
                                                 if (show) {
                                                 
                                                     if (item.StageID.wrappedValue == 1) {
-
-                                                        NavigationLink(destination: LessonView(lesson: item), tag: item.id, selection: $mvm.stageNavSelection) { }
+                                                        
                                                         Button (action: {
                                                             
                                                             mvm.listType = "lesson"
@@ -175,10 +172,10 @@ struct StageView: View {
                                                             mvm.stageNavSelection = item.id
                                                             
                                                         }) {
-                                                            
+                                                            NavigationLink(destination: LessonView(lesson: item), tag: item.id, selection: $mvm.stageNavSelection) { }
                                                             ListItem(item: item)
                                                         }
-                                                     
+                                                        
                                                     } else if (
                                                         (item.StageID.wrappedValue == 2) ||
                                                         (item.StageID.wrappedValue == 5) ||
@@ -189,8 +186,7 @@ struct StageView: View {
                                                         ListItem(item: item)
 
                                                     } else if (item.StageID.wrappedValue == 4) {
-
-                                                        NavigationLink(destination: QLView(), tag: item.id, selection: $mvm.stageNavSelection) { }
+                                                        
                                                         Button (action: {
                                                             
                                                             mvm.lessonSelected = item.wrappedValue
@@ -198,11 +194,10 @@ struct StageView: View {
                                                             mvm.stageNavSelection = item.id
                                                             
                                                         }) {
-                                                            
+                                                            NavigationLink(destination: QLView(), tag: item.id, selection: $mvm.stageNavSelection) { }
                                                             ListItem(item: item)
                                                         }
-                                                        
-                                                    }                                                                                                        
+                                                    }
                                                 }
                                             }
                                         }
@@ -224,7 +219,7 @@ struct StageView: View {
         .navigationBarHidden(true)
         .frame(maxWidth: .infinity)
         .clipped()
-        .ignoresSafeArea()
+        .ignoresSafeArea(.all, edges: .top)
         .onAppear {
             
             mvm.viewLevel = "stage"
@@ -237,7 +232,7 @@ struct StageView: View {
             if (mvm.backForce) { dismiss() }
         }
         .task(id: mvm.back) {
-            if (mvm.back) { dismiss(); mvm.back = false }
+            if (mvm.back) { mvm.back = false; dismiss(); }
         }
         .onRotate { newOrientation in
             
