@@ -554,9 +554,9 @@ struct QLItem: View {
         }
         .frame(maxWidth:.infinity)
         .onAppear() {
-            
             text = item.IntroText
                 .replacingOccurrences(of: "<span style=\"font-size: 40px;\">", with: "")
+                .replacingOccurrences(of: "<span style=\"font-size: 40px;\">ٌ", with: "ٌ")
                 .replacingOccurrences(of: "</span>", with: "")
                 .replacingOccurrences(of: "<br />", with: "\n")
                 .replacingOccurrences(of: "<br >", with: "\n")
