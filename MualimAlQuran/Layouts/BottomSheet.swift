@@ -53,6 +53,7 @@ struct BottomSheet: View {
                         if (url != nil) {
                             
                             player = AVPlayer(url: Bundle.main.url(forResource: sheetVM.videoUrl, withExtension: "mp4")!)
+                            audioSilent()
                             player.play()
                         }
                     }

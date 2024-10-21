@@ -13,52 +13,6 @@ class GlobalGrid: ObservableObject {
     @Published var columns = [GridItem(.adaptive(minimum: 300))]
 }
 
-class vc1: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .red
-        let app = UINavigationBarAppearance()
-            app.backgroundColor = .white
-        self.navigationController?.navigationBar.scrollEdgeAppearance = app
-        title = "home"
-        
-    }
-}
-
-class vc2: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .purple
-        title = "contacts"
-    }
-}
-
-class vc3: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .blue
-        title = "Create"
-    }
-}
-
-class vc4: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = .green
-        title = "contacts"
-    }
-}
-
-class vc5: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = .yellow
-        title = "contacts"
-    }
-}
-
 @main
 struct MualimAlQuranApp: App {
     

@@ -15,6 +15,7 @@ class Player: NSObject, AVAudioPlayerDelegate, ObservableObject {
         player = try! AVAudioPlayer(contentsOf: url)
         player.delegate = self
         
+        audioSilent()
         player.play()
         
         DispatchQueue.main.async {
@@ -51,6 +52,17 @@ class Player: NSObject, AVAudioPlayerDelegate, ObservableObject {
     }
     
     func play() {
+        audioSilent()
         player.play()
+    }
+}
+
+func audioSilent() {
+    
+    do {
+        try AVAudioSession.sharedInstance().setCategory(.playback)
+    }
+    catch {
+        
     }
 }

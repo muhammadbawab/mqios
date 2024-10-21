@@ -129,7 +129,7 @@ struct LanguageLayout: View {
         .navigationBarHidden(true)
         .frame(maxWidth: .infinity)
         .clipped()
-        .ignoresSafeArea(.all, edges: .top)
+        .ignoresSafeArea(.all, edges: [.top, .leading, .trailing])
         .onAppear {
             mvm.viewLevel = "page"
             mvm.back = false                        

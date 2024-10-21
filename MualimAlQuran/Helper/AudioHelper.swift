@@ -542,9 +542,9 @@ struct AudioHelper {
         let url = filePath(name: audioFileName)
         
         if (try! url.checkResourceIsReachable()) {
-                        
+            
             player.play(url: url)
-        }                
+        }
     }
     
     func pauseVerse() {

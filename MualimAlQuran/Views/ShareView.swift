@@ -40,11 +40,14 @@ struct ShareView: View {
                         
                         Button(action: {
                             
-                            let vc:UIViewController = (UIApplication.shared.firstKeyWindow?.rootViewController)!
+                            let activeScene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
+                            let rootViewController = (activeScene?.windows ?? []).first(where: { $0.isKeyWindow })?.rootViewController
                             
-                            let AV = UIActivityViewController(activityItems: ["Mu'alim al-Qur'an - https://mualim-alquran.com"], applicationActivities: nil)
+                            let AV = UIActivityViewController(activityItems: ["Mu'alim al-Qur'an: https://mualim-alquran.com"], applicationActivities: nil)
+                            AV.popoverPresentationController?.sourceView = rootViewController?.view
+                            AV.popoverPresentationController?.sourceRect = .zero
                             
-                            vc.present(AV, animated: true)
+                            rootViewController?.present(AV, animated: true, completion: nil)
                             
                         }) {
                             

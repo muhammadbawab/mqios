@@ -120,7 +120,7 @@ struct QLView: View {
         .navigationBarHidden(true)
         .frame(maxWidth: .infinity)
         .clipped()
-        .ignoresSafeArea(.all, edges: .top)
+        .ignoresSafeArea(.all, edges: [.top, .leading, .trailing])
         .onAppear {
             
             activeItem = mvm.qlItems.first{ $0.Type == "Header" }?.id ?? -1
