@@ -80,7 +80,7 @@ struct NavView: View {
                         
                     } label: {
                         
-                        VStack(spacing: 0) {
+                        VStack {
                             
                             if (tab == Tab.home) {
                                 
@@ -135,16 +135,13 @@ struct NavView: View {
                                 }
                             }
                         }
-                        .frame(width: 50, height: 50)
-                        
                     }
-                    .frame(maxWidth: .infinity, minHeight: 50)
+                    .frame(maxWidth: .infinity, maxHeight: 40)
                     .foregroundStyle(mvm.selectedTab == tab ? colorResource.primary_500 : .secondary)
                     
                     Spacer()
                 }
             }
-            .frame(height: 50)
         }
     }
 }

@@ -9,6 +9,7 @@ struct DropDown: View {
     @Binding var selected: String
     @Binding var vm: RecitationViewModel
     @Binding var audioHelper: AudioHelper
+    @Binding var geo: GeometryProxy
     @State var isPresented = false
     
     var body: some View {
@@ -47,6 +48,30 @@ struct DropDown: View {
             .background(colorResource.lightButton.opacity(0.5))
             .padding(.trailing, (type == "4") ? 0 : 1)
             .popover(isPresented: $isPresented) {
+                
+                var width: CGFloat {
+                    
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        
+                        return (geo.size.width > 500) ? 500 : geo.size.width
+                    }
+                    else {
+                        
+                        return geo.size.width
+                    }
+                }
+                
+                var height: CGFloat {
+                    
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        
+                        return (geo.size.height > 500) ? 500 : geo.size.height
+                    }
+                    else {
+                        
+                        return geo.size.height + geo.safeAreaInsets.bottom
+                    }
+                }
                 
                 ScrollViewReader { scrollView in
                     
@@ -177,8 +202,9 @@ struct DropDown: View {
                             
                         }
                     }
+                    .frame(width: width, height: height)
                     .task(id: isPresented) {
-                        
+                        print(geo.size.width)
                         scrollView.scrollTo(selected, anchor: .center)
                     }
                 }

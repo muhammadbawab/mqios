@@ -126,7 +126,8 @@ struct RecitationView: View {
                                         items: $vm.surah.items,
                                         selected: $vm.surah.selected,
                                         vm: .constant(vm),
-                                        audioHelper: .constant(audioHelper)
+                                        audioHelper: .constant(audioHelper),
+                                        geo: .constant(geo)
                                     )
                                 }
                                 .frame(width: (geo.size.width - 20) * 0.31)
@@ -138,7 +139,8 @@ struct RecitationView: View {
                                         items: $vm.ayah.items,
                                         selected: $vm.ayah.selected,
                                         vm: .constant(vm),
-                                        audioHelper: .constant(audioHelper)
+                                        audioHelper: .constant(audioHelper),
+                                        geo: .constant(geo)
                                     )
                                 }
                                 .frame(width: (geo.size.width - 20) * 0.23)
@@ -150,7 +152,8 @@ struct RecitationView: View {
                                         items: $vm.page.items,
                                         selected: $vm.page.selected,
                                         vm: .constant(vm),
-                                        audioHelper: .constant(audioHelper)
+                                        audioHelper: .constant(audioHelper),
+                                        geo: .constant(geo)
                                     )
                                 }
                                 .frame(width: (geo.size.width - 20) * 0.23)
@@ -162,7 +165,8 @@ struct RecitationView: View {
                                         items: $vm.juzu.items,
                                         selected: $vm.juzu.selected,
                                         vm: .constant(vm),
-                                        audioHelper: .constant(audioHelper)
+                                        audioHelper: .constant(audioHelper),
+                                        geo: .constant(geo)
                                     )
                                 }
                                 .frame(width: (geo.size.width - 20) * 0.23)

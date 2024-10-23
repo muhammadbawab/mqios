@@ -25,7 +25,6 @@ struct Navigation: View {
                 }
                 .navigationBarHidden(true)
                 .navigationViewStyle(.stack)
-                
                 .tag(Tab.home)
                 
                 NavigationView {
@@ -70,7 +69,6 @@ struct Navigation: View {
                 }
                 .navigationBarHidden(true)
                 .navigationViewStyle(.stack)
-                
                 .tag(Tab.more)
                 .ignoresSafeArea(.keyboard)
             }

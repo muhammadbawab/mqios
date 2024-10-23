@@ -29,12 +29,12 @@ struct MualimAlQuranApp: App {
         
         WindowGroup {
             
-            ZStack {
+            //ZStack {
                 
                 Navigation()
                     .environmentObject(mvm) 
                     .environmentObject(sheetVM)                    
-            }
+            //}
             /*.onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                 ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
                     
