@@ -65,9 +65,6 @@ struct LanguageLayout: View {
                                                 sheetVM.summary = mvm.home.RestartAppSummary
                                                 sheetVM.sheetState.toggle()
                                                 
-                                                print(mvm.home.RestartApp)
-                                                print(mvm.home.RestartAppSummary)
-                                                
                                                 Task.detached { @MainActor in
                                                     
                                                     mvm.initiated = false

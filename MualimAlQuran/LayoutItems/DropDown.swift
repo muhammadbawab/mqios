@@ -204,7 +204,6 @@ struct DropDown: View {
                     }
                     .frame(width: width, height: height)
                     .task(id: isPresented) {
-                        print(geo.size.width)
                         scrollView.scrollTo(selected, anchor: .center)
                     }
                 }

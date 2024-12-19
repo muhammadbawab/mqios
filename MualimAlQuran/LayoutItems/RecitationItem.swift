@@ -640,36 +640,45 @@ struct RecitationItem: View {
                                             if (!s.isEmpty) {
                                                 
                                                 if (s[0] == "#") {
-                                                                                                        
-                                                    let toColor = s.dropFirst(10)
-                                                    let str = toColor[..<toColor.firstIndex(of: "<")!]
                                                     
-                                                    if (str == "ـٰ") {
+                                                    let toColor = s.dropFirst(10)
+                                                    
+                                                    //if (toColor.firstIndex(of: "<") != nil) {
                                                         
-                                                        //var subStr = AttributedString("ـ" + "ـٰ" + "ـ")
-                                                        var subStr = AttributedString("ـٰ")
+                                                        let str = toColor[..<toColor.firstIndex(of: "<")!]
                                                         
-                                                        if let range = subStr.range(of: str) {
-                                                            subStr[range].foregroundColor = Color(hex: s[1...6])
+                                                        if (str == "ـٰ") {
+                                                            
+                                                            //var subStr = AttributedString("ـ" + "ـٰ" + "ـ")
+                                                            var subStr = AttributedString("ـٰ")
+                                                            
+                                                            if let range = subStr.range(of: str) {
+                                                                subStr[range].foregroundColor = Color(hex: s[1...6])
+                                                            }
+                                                            
+                                                            attributedString.append(subStr)
                                                         }
-                                                        
-                                                        attributedString.append(subStr)
-                                                    }
-                                                    else {
-                                                        
-                                                        var subStr = AttributedString(str)
-                                                        
-                                                        if let range = subStr.range(of: str) {
-                                                            subStr[range].foregroundColor = Color(hex: s[1...6])
+                                                        else {
+                                                            
+                                                            var subStr = AttributedString(str)
+                                                            
+                                                            if let range = subStr.range(of: str) {
+                                                                subStr[range].foregroundColor = Color(hex: s[1...6])
+                                                            }
+                                                            
+                                                            attributedString.append(subStr)
                                                         }
-                                                        
-                                                        attributedString.append(subStr)
-                                                    }
+                                                    
                                                     
                                                     let target = toColor.range(of: "</span>")
                                                     let strRest = toColor.dropFirst(toColor.distance(from: toColor.startIndex, to: target!.lowerBound)).replacingOccurrences(of: "</span>", with: "")
                                                     
                                                     attributedString.append(AttributedString(strRest))
+                                                    //}
+                                                    //else {
+                                                    //    print(ayahString)
+                                                    //    print(s)
+                                                    //}
                                                 }
                                                 else {
                                                     

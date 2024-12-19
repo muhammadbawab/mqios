@@ -77,7 +77,6 @@
 		1B45FF832C2C29B600D8D065 /* TajweedEx24.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B45FF4C2C2C29B500D8D065 /* TajweedEx24.json */; };
 		1B45FF842C2C29B600D8D065 /* TajweedExSetup.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B45FF4D2C2C29B500D8D065 /* TajweedExSetup.json */; };
 		1B45FF852C2C29B600D8D065 /* QL30.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B45FF4E2C2C29B500D8D065 /* QL30.json */; };
-		1B45FF862C2C29B600D8D065 /* Verses.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B45FF4F2C2C29B500D8D065 /* Verses.json */; };
 		1B45FF872C2C29B600D8D065 /* Lesson11.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B45FF502C2C29B500D8D065 /* Lesson11.json */; };
 		1B45FF882C2C29B600D8D065 /* QLHeaders.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B45FF512C2C29B500D8D065 /* QLHeaders.json */; };
 		1B45FF892C2C29B600D8D065 /* TajweedEx10.json in Resources */ = {isa = PBXBuildFile; fileRef = 1B45FF522C2C29B500D8D065 /* TajweedEx10.json */; };
@@ -2753,6 +2752,7 @@
 		1BAB6B3C2985565E0005917A /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAB6B3B2985565E0005917A /* ListModel.swift */; };
 		1BAB6B40298558510005917A /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAB6B3F298558510005917A /* Extentions.swift */; };
 		1BAB6B42298558C70005917A /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAB6B41298558C70005917A /* Helper.swift */; };
+		1BAD78C42D12A26B00A2530E /* Verses.json in Resources */ = {isa = PBXBuildFile; fileRef = 1BAD78C32D12A26B00A2530E /* Verses.json */; };
 		1BB316F92C5796A5000A7C51 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB316F82C5796A5000A7C51 /* Form.swift */; };
 		1BB316FB2C57972F000A7C51 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB316FA2C57972F000A7C51 /* User.swift */; };
 		1BB800392CBF8B29002272DF /* 20.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1BB8001B2CBF8B20002272DF /* 20.mp4 */; };
@@ -4299,7 +4299,6 @@
 		1B45FF4C2C2C29B500D8D065 /* TajweedEx24.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TajweedEx24.json; sourceTree = "<group>"; };
 		1B45FF4D2C2C29B500D8D065 /* TajweedExSetup.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TajweedExSetup.json; sourceTree = "<group>"; };
 		1B45FF4E2C2C29B500D8D065 /* QL30.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = QL30.json; sourceTree = "<group>"; };
-		1B45FF4F2C2C29B500D8D065 /* Verses.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Verses.json; sourceTree = "<group>"; };
 		1B45FF502C2C29B500D8D065 /* Lesson11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Lesson11.json; sourceTree = "<group>"; };
 		1B45FF512C2C29B500D8D065 /* QLHeaders.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = QLHeaders.json; sourceTree = "<group>"; };
 		1B45FF522C2C29B500D8D065 /* TajweedEx10.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TajweedEx10.json; sourceTree = "<group>"; };
@@ -6976,6 +6975,7 @@
 		1BAB6B3B2985565E0005917A /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		1BAB6B3F298558510005917A /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		1BAB6B41298558C70005917A /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		1BAD78C32D12A26B00A2530E /* Verses.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Verses.json; sourceTree = "<group>"; };
 		1BB316F82C5796A5000A7C51 /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		1BB316FA2C57972F000A7C51 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1BB8001B2CBF8B20002272DF /* 20.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 20.mp4; sourceTree = "<group>"; };
@@ -12703,6 +12703,7 @@
 		1BAB6B372985144B0005917A /* db */ = {
 			isa = PBXGroup;
 			children = (
+				1BAD78C32D12A26B00A2530E /* Verses.json */,
 				1B418AEB2C7CC07B00DAD58E /* Home.json */,
 				1B45FF2B2C2C29B200D8D065 /* Lesson1.json */,
 				1B45FF392C2C29B300D8D065 /* Lesson3.json */,
@@ -12757,7 +12758,6 @@
 				1B45FF4C2C2C29B500D8D065 /* TajweedEx24.json */,
 				1B45FF472C2C29B400D8D065 /* TajweedEx25.json */,
 				1B45FF4D2C2C29B500D8D065 /* TajweedExSetup.json */,
-				1B45FF4F2C2C29B500D8D065 /* Verses.json */,
 				1B45FF572C2C29B600D8D065 /* Verses1.json */,
 			);
 			path = db;
@@ -14170,7 +14170,6 @@
 				1BA15F872C95D9FE00ACB662 /* L3_W19.mp3 in Resources */,
 				1BA168FD2C95E03E00ACB662 /* L34_W36.mp3 in Resources */,
 				1BA2E68B2ADCF54B009890F6 /* 004_silence_57.mp3 in Resources */,
-				1B45FF862C2C29B600D8D065 /* Verses.json in Resources */,
 				1BA1625D2C95DB8100ACB662 /* L12_W9.mp3 in Resources */,
 				1BA2E51F2ADCF54A009890F6 /* 008_silence_8.mp3 in Resources */,
 				1BA16C5C2C9616C600ACB662 /* V_L6_W2.mp3 in Resources */,
@@ -14184,6 +14183,7 @@
 				1BA167022C95DDC900ACB662 /* L30_W67.mp3 in Resources */,
 				1BA1671B2C95DDC900ACB662 /* L30_W46.mp3 in Resources */,
 				1B45FF942C2C29B600D8D065 /* TajweedEx3.json in Resources */,
+				1BAD78C42D12A26B00A2530E /* Verses.json in Resources */,
 				1BA2E5882ADCF54B009890F6 /* 008_silence_94.mp3 in Resources */,
 				1BF1A6B32C961DCA00CAB8D2 /* V1_L24_W16.mp3 in Resources */,
 				1BA2E6782ADCF54B009890F6 /* 004_silence_9.mp3 in Resources */,

@@ -136,7 +136,6 @@ struct DownloadLayout: View {
             
             if (mvm.downloadItems.isEmpty) {
                 
-                print("empty")
                 Task {
                     try! await Task.sleep(nanoseconds:300_000_000)
                     mvm.loadDownloadItems()
